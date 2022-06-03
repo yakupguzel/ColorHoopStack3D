@@ -8,7 +8,7 @@ public class Cember : MonoBehaviour
     public GameObject _aitOlduguStand;
     public GameObject _aitOlduguCemberSoketi;
     public bool hareketEdebilirMi;
-    public string renk;
+    public Colors renk;
     public GameManager gameManager;
 
     GameObject hareketPozisyonu;
@@ -16,21 +16,29 @@ public class Cember : MonoBehaviour
 
     bool secildi, pozisyonDegistir, soketeOtur, soketeGeriGit;
 
-    public void HareketEt(string islem, GameObject stand = null, GameObject soket = null, GameObject gidilecekObje = null)
+    private void Awake()
     {
-        switch (islem)
+        //int randomColorIndex = Random.Range(0, gameManager.hoopColor.Length);
+        //renk = (Colors)randomColorIndex;
+        //gameObject.GetComponent<Renderer>().material.SetColor("_Color", gameManager.hoopColor[randomColorIndex].color);
+    }
+
+
+    public void HareketEt(ActionState state, GameObject stand = null, GameObject soket = null, GameObject gidilecekObje = null)
+    {
+        switch (state)
         {
-            case "Secim":
+            case ActionState.Choosen:
                 hareketPozisyonu = gidilecekObje;
                 secildi = true;
                 break;
-            case "PozisyonDegistir":
+            case ActionState.ShiftPosition:
                 gidecegiStand = stand;
                 _aitOlduguCemberSoketi = soket;
                 hareketPozisyonu = gidilecekObje;
                 pozisyonDegistir = true;
                 break;
-            case "SoketeGeriGit":
+            case ActionState.BackToLastSocket:
                 soketeGeriGit = true;
                 break;
             default:
@@ -58,7 +66,6 @@ public class Cember : MonoBehaviour
             {
                 pozisyonDegistir = false;
                 soketeOtur = true;
-
             }
         }
 
