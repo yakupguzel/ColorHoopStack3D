@@ -30,9 +30,8 @@ public class Cember : MonoBehaviour
                 hareketPozisyonu = gidilecekObje;
                 pozisyonDegistir = true;
                 break;
-            case "SoketeOtur":
-                break;
             case "SoketeGeriGit":
+                soketeGeriGit = true;
                 break;
             default:
                 break;
@@ -83,6 +82,19 @@ public class Cember : MonoBehaviour
 
 
                 }
+                gameManager.hareketVar = false;
+            }
+        }
+
+        if (soketeGeriGit)
+        {
+            transform.position = Vector3.Lerp(transform.position, _aitOlduguCemberSoketi.transform.position, 10f * Time.deltaTime);
+
+            if (Vector3.Distance(transform.position, _aitOlduguCemberSoketi.transform.position) < .05f)
+            {
+                transform.position = _aitOlduguCemberSoketi.transform.position;
+
+                soketeGeriGit = false;
                 gameManager.hareketVar = false;
             }
         }
