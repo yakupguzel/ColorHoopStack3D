@@ -22,7 +22,17 @@ public class GameManager : MonoBehaviour
                 {
                     if (seciliObje != null && seciliStand != hit.collider.gameObject)
                     {
+                        // seciliObje null deðil ve seciliStand ait oldugu stand deðil ise sonraki standa git
+                        Stand stand = hit.collider.GetComponent<Stand>();
+                        seciliStand.GetComponent<Stand>().SoketDegistirmeIslemleri(seciliObje);
                         // cemberi diger standa gonder
+                        _Cember.HareketEt("PozisyonDegistir", hit.collider.gameObject, stand.MusaitSoketiVer(), stand.hareketPozisyonu);
+
+                        stand.bosOlanSoket++;
+                        stand._Cemberler.Add(seciliObje);
+                        seciliObje = null;
+                        seciliStand = null;
+
                     }
                     else
                     {
@@ -31,11 +41,12 @@ public class GameManager : MonoBehaviour
                         _Cember = seciliObje.GetComponent<Cember>();
                         hareketVar = true;
 
-                        if (_Cember.hakeretEdebilirMi)
+                        if (_Cember.hareketEdebilirMi)
                         {
                             _Cember.HareketEt("Secim", null, null, _Cember._aitOlduguStand.GetComponent<Stand>().hareketPozisyonu);
 
                             seciliStand = _Cember._aitOlduguStand;
+                            Debug.Log("Yes!");
                         }
                     }
                 }

@@ -13,6 +13,22 @@ public class Stand : MonoBehaviour
 
     public GameObject EnUsttekiCemberiVer()
     {
-        return _Cemberler[_Cemberler.Count-1];
+        return _Cemberler[_Cemberler.Count - 1];
+    }
+
+    public GameObject MusaitSoketiVer()
+    {
+        return soketler[bosOlanSoket];
+    }
+
+    public void SoketDegistirmeIslemleri(GameObject silinecekObje)
+    {
+        _Cemberler.Remove(silinecekObje); // Listeden Kaldir
+
+        if (_Cemberler.Count != 0)
+        {
+            bosOlanSoket--;
+            _Cemberler[_Cemberler.Count - 1].GetComponent<Cember>().hareketEdebilirMi = true;
+        }
     }
 }
