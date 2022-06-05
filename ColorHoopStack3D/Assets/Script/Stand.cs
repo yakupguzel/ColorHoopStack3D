@@ -11,6 +11,8 @@ public class Stand : MonoBehaviour
 
     [SerializeField] private GameManager _GameManager;
 
+    private int CemberTamamlamaSayisi;
+
     public GameObject EnUsttekiCemberiVer()
     {
         // en ustteki cemberi ver
@@ -35,5 +37,47 @@ public class Stand : MonoBehaviour
         {
             bosOlanSoket = 0;
         }
+    }
+
+    public bool CemberleriKontrolEt()
+    {
+        Colors currentColor = _Cemberler[0].GetComponent<Cember>().renk;
+
+        if (_Cemberler.Count == 4)
+        {
+            foreach (var cember in _Cemberler)
+            {
+                if (currentColor == cember.GetComponent<Cember>().renk)
+                {
+                    CemberTamamlamaSayisi++;
+                }
+            }
+
+            if (CemberTamamlamaSayisi == 4)
+            {
+                _GameManager.StandTamamlandi();
+                return true;
+            }
+            else
+            {
+                CemberTamamlamaSayisi = 0;
+
+            }
+        }
+        return false;
+    }
+
+    public void StandTamamlandi()
+    {
+        foreach (var cember in _Cemberler)
+        {
+            cember.GetComponent<Cember>().hareketEdebilirMi = false;
+
+            Color32 color = cember.GetComponent<MeshRenderer>().material.GetColor("_Color");
+            color.a = 150;
+            cember.GetComponent<MeshRenderer>().material.SetColor("_Color", color);
+            gameObject.tag = "TamamlanmisStand";
+        }
+        
     }
 }

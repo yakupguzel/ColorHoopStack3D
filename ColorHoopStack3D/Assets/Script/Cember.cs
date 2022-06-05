@@ -16,13 +16,6 @@ public class Cember : MonoBehaviour
 
     bool secildi, pozisyonDegistir, soketeOtur, soketeGeriGit;
 
-    private void Awake()
-    {
-        //int randomColorIndex = Random.Range(0, gameManager.hoopColor.Length);
-        //renk = (Colors)randomColorIndex;
-        //gameObject.GetComponent<Renderer>().material.SetColor("_Color", gameManager.hoopColor[randomColorIndex].color);
-    }
-
 
     public void HareketEt(ActionState state, GameObject stand = null, GameObject soket = null, GameObject gidilecekObje = null)
     {

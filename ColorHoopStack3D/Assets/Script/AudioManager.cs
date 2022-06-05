@@ -7,6 +7,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource gameMusic;
     [SerializeField] AudioSource backtoSocket;
     [SerializeField] AudioSource gotoNext;
+    [SerializeField] AudioSource standComplate;
+    [SerializeField] AudioSource levelEnd;
 
 
     public void BackToSocket()
@@ -19,5 +21,18 @@ public class AudioManager : MonoBehaviour
     {
         gotoNext.Stop();
         gotoNext.Play();
+    }
+
+    public void StandComplate()
+    {
+        standComplate.Stop();
+        standComplate.Play();
+    }
+
+    public void LevelEnd()
+    {
+        gameMusic.Stop();
+        levelEnd.Stop();
+        levelEnd.Play();
     }
 }

@@ -9,7 +9,8 @@ public enum Colors
     Purple = 2,
     Red = 3,
     Yellow = 4,
-    Cyan = 5
+    Cyan = 5,
+    Grey = 6
 }
 
 public enum ActionState
